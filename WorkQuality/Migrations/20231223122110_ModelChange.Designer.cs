@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using WorkQuality.Models;
 
@@ -11,9 +12,11 @@ using WorkQuality.Models;
 namespace WorkQuality.Migrations
 {
     [DbContext(typeof(WorkQualityDbContext))]
-    partial class WorkQualityDbContextModelSnapshot : ModelSnapshot
+    [Migration("20231223122110_ModelChange")]
+    partial class ModelChange
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -33,7 +36,7 @@ namespace WorkQuality.Migrations
                     b.Property<int>("AbilityToApplyTechnicalKnowledgeScore")
                         .HasColumnType("int");
 
-                    b.Property<DateTime>("AssessmentDate")
+                    b.Property<DateTime?>("AssessmentDate")
                         .HasColumnType("datetime2");
 
                     b.Property<int>("EmployeeId")
@@ -58,6 +61,35 @@ namespace WorkQuality.Migrations
                     b.ToTable("Assessments");
                 });
 
+            modelBuilder.Entity("WorkQuality.Models.Criterion", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<string>("Description")
+                        .IsRequired()
+                        .HasMaxLength(1000)
+                        .HasColumnType("nvarchar(1000)");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasMaxLength(200)
+                        .HasColumnType("nvarchar(200)");
+
+                    b.Property<double?>("PriorityCoefficient")
+                        .HasColumnType("float");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("Name")
+                        .IsUnique();
+
+                    b.ToTable("Criteria");
+                });
+
             modelBuilder.Entity("WorkQuality.Models.Employee", b =>
                 {
                     b.Property<int>("Id")
@@ -67,6 +99,7 @@ namespace WorkQuality.Migrations
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
                     b.Property<string>("Description")
+                        .IsRequired()
                         .HasMaxLength(1000)
                         .HasColumnType("nvarchar(1000)");
 
@@ -102,6 +135,7 @@ namespace WorkQuality.Migrations
                         .HasColumnType("float");
 
                     b.Property<string>("Description")
+                        .IsRequired()
                         .HasMaxLength(1000)
                         .HasColumnType("nvarchar(1000)");
 
@@ -127,6 +161,32 @@ namespace WorkQuality.Migrations
                     b.ToTable("Jobs");
                 });
 
+            modelBuilder.Entity("WorkQuality.Models.Score", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<int>("CriterionId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("ExaminationId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("QualityScore")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("CriterionId");
+
+                    b.HasIndex("ExaminationId");
+
+                    b.ToTable("Scores");
+                });
+
             modelBuilder.Entity("WorkQuality.Models.Assessment", b =>
                 {
                     b.HasOne("WorkQuality.Models.Employee", "Employee")
@@ -147,6 +207,25 @@ namespace WorkQuality.Migrations
                         .IsRequired();
 
                     b.Navigation("Job");
+                });
+
+            modelBuilder.Entity("WorkQuality.Models.Score", b =>
+                {
+                    b.HasOne("WorkQuality.Models.Criterion", "Criterion")
+                        .WithMany()
+                        .HasForeignKey("CriterionId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("WorkQuality.Models.Assessment", "Examination")
+                        .WithMany()
+                        .HasForeignKey("ExaminationId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Criterion");
+
+                    b.Navigation("Examination");
                 });
 
             modelBuilder.Entity("WorkQuality.Models.Employee", b =>

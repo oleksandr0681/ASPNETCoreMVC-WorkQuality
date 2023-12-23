@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using WorkQuality.Models;
 
@@ -11,9 +12,11 @@ using WorkQuality.Models;
 namespace WorkQuality.Migrations
 {
     [DbContext(typeof(WorkQualityDbContext))]
-    partial class WorkQualityDbContextModelSnapshot : ModelSnapshot
+    [Migration("20231223122615_RemoveTables")]
+    partial class RemoveTables
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -33,7 +36,7 @@ namespace WorkQuality.Migrations
                     b.Property<int>("AbilityToApplyTechnicalKnowledgeScore")
                         .HasColumnType("int");
 
-                    b.Property<DateTime>("AssessmentDate")
+                    b.Property<DateTime?>("AssessmentDate")
                         .HasColumnType("datetime2");
 
                     b.Property<int>("EmployeeId")
@@ -67,6 +70,7 @@ namespace WorkQuality.Migrations
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
                     b.Property<string>("Description")
+                        .IsRequired()
                         .HasMaxLength(1000)
                         .HasColumnType("nvarchar(1000)");
 
@@ -102,6 +106,7 @@ namespace WorkQuality.Migrations
                         .HasColumnType("float");
 
                     b.Property<string>("Description")
+                        .IsRequired()
                         .HasMaxLength(1000)
                         .HasColumnType("nvarchar(1000)");
 

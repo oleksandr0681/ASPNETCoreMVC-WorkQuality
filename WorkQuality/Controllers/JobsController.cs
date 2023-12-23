@@ -55,7 +55,7 @@ namespace WorkQuality.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,Name,Description")] Job job)
+        public async Task<IActionResult> Create([Bind("Id,Name,Description,TechnicalKnowledgePriorityCoefficient,AbilityToApplyTechnicalKnowledgePriorityCoefficient,ProjectManagementSkillsPriorityCoefficient,QualityCustomerServicePriorityCoefficient")] Job job)
         {
             if (ModelState.IsValid)
             {
@@ -87,7 +87,7 @@ namespace WorkQuality.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,Name,Description")] Job job)
+        public async Task<IActionResult> Edit(int id, [Bind("Id,Name,Description,TechnicalKnowledgePriorityCoefficient,AbilityToApplyTechnicalKnowledgePriorityCoefficient,ProjectManagementSkillsPriorityCoefficient,QualityCustomerServicePriorityCoefficient")] Job job)
         {
             if (id != job.Id)
             {

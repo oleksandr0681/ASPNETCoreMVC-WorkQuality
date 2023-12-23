@@ -10,7 +10,7 @@ namespace WorkQuality.Models
 
         public int ExaminationId { get; set; } // Ім'я класа і ID дають FOREIGN KEY (зовнішній ключ).
 
-        public Examination? Examination { get; set; } // Зв'язок з таблицею Examinations.
+        public Assessment? Examination { get; set; } // Зв'язок з таблицею Examinations.
 
         public int CriterionId { get; set; } // Ім'я класа і ID дають FOREIGN KEY (зовнішній ключ).
 

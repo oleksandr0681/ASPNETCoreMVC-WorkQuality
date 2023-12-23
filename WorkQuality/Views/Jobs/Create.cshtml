@@ -23,6 +23,26 @@
                 <span asp-validation-for="Description" class="text-danger"></span>
             </div>
             <div class="form-group">
+                <label asp-for="TechnicalKnowledgePriorityCoefficient" class="control-label"></label>
+                <input asp-for="TechnicalKnowledgePriorityCoefficient" value="1" class="form-control" />
+                <span asp-validation-for="TechnicalKnowledgePriorityCoefficient" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="AbilityToApplyTechnicalKnowledgePriorityCoefficient" class="control-label"></label>
+                <input asp-for="AbilityToApplyTechnicalKnowledgePriorityCoefficient" value="1" class="form-control" />
+                <span asp-validation-for="AbilityToApplyTechnicalKnowledgePriorityCoefficient" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="ProjectManagementSkillsPriorityCoefficient" class="control-label"></label>
+                <input asp-for="ProjectManagementSkillsPriorityCoefficient" value="1" class="form-control" />
+                <span asp-validation-for="ProjectManagementSkillsPriorityCoefficient" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="QualityCustomerServicePriorityCoefficient" class="control-label"></label>
+                <input asp-for="QualityCustomerServicePriorityCoefficient" value="1" class="form-control" />
+                <span asp-validation-for="QualityCustomerServicePriorityCoefficient" class="text-danger"></span>
+            </div>
+            <div class="form-group">
                 <input type="submit" value="Create" class="btn btn-primary" />
             </div>
         </form>
@@ -34,5 +54,5 @@
 </div>
 
 @section Scripts {
-    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+    @* @{await Html.RenderPartialAsync("_ValidationScriptsPartial");} *@
 }

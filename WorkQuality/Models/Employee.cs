@@ -15,12 +15,12 @@ namespace WorkQuality.Models
         public string LastName { get; set; } = string.Empty;
 
         [MaxLength(1000)]
-        public string Description { get; set; } = string.Empty;
+        public string? Description { get; set; } = string.Empty;
 
         public int JobId { get; set; } // Ім'я класа і ID дають FOREIGN KEY (зовнішній ключ).
 
         public Job? Job { get; set; } // Зв'язок з таблицею Jobs.
 
-        public ICollection<Examination>? Examinations { get; set; }
+        public ICollection<Assessment>? Assessments { get; set; }
     }
 }

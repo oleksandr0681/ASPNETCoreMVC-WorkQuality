@@ -32,9 +32,30 @@
             @Html.DisplayNameFor(model => model.Job)
         </dt>
         <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Job.Id)
+            @* @Html.DisplayFor(model => model.Job.Id) *@
+            @Html.DisplayFor(model => model.Job.Name)
         </dd>
     </dl>
+    <p>Рейтинг</p>
+    <ul>
+        @if (Model.Assessments != null)
+        {
+            @foreach (Assessment assessment in Model.Assessments)
+            {
+                if (assessment != null)
+                {
+                    <li>
+                        @if (assessment.AssessmentDate != null)
+                        {
+                            @assessment.AssessmentDate.ToLongDateString()
+                        }
+                        <span> </span>
+                        @assessment.Rating
+                    </li>
+                }
+            }
+        }
+    </ul>
 </div>
 <div>
     <a asp-action="Edit" asp-route-id="@Model?.Id">Edit</a> |

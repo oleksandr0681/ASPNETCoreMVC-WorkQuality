@@ -13,8 +13,16 @@ namespace WorkQuality.Models
         public string Name { get; set; } = string.Empty;
 
         [MaxLength(1000)]
-        public string Description { get; set; } = string.Empty;
+        public string? Description { get; set; } = string.Empty;
 
-        public ICollection<Criterion>? Criteria { get; set; }
+        public double TechnicalKnowledgePriorityCoefficient { get; set; } = 1;
+
+        public double AbilityToApplyTechnicalKnowledgePriorityCoefficient { get; set; } = 1;
+
+        public double ProjectManagementSkillsPriorityCoefficient { get; set; } = 1;
+
+        public double QualityCustomerServicePriorityCoefficient { get; set; } = 1;
+
+        //public ICollection<Criterion>? Criteria { get; set; }
     }
 }
