@@ -1,9 +1,7 @@
 ﻿using System;
-using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-//using AspNetCore;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
@@ -57,7 +55,6 @@ namespace WorkQuality.Controllers
         // GET: Employees/Create
         public IActionResult Create()
         {
-            //ViewData["JobId"] = new SelectList(_context.Jobs, "Id", "Id");
             ViewData["JobId"] = new SelectList(_context.Jobs, "Id", "Name");
             return View();
         }
@@ -75,7 +72,6 @@ namespace WorkQuality.Controllers
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            //ViewData["JobId"] = new SelectList(_context.Jobs, "Id", "Id", employee.JobId);
             ViewData["JobId"] = new SelectList(_context.Jobs, "Id", "Name", employee.JobId);
             return View(employee);
         }
@@ -93,7 +89,6 @@ namespace WorkQuality.Controllers
             {
                 return NotFound();
             }
-            //ViewData["JobId"] = new SelectList(_context.Jobs, "Id", "Id", employee.JobId);
             ViewData["JobId"] = new SelectList(_context.Jobs, "Id", "Name", employee.JobId);
             return View(employee);
         }
@@ -130,7 +125,6 @@ namespace WorkQuality.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
-            //ViewData["JobId"] = new SelectList(_context.Jobs, "Id", "Id", employee.JobId);
             ViewData["JobId"] = new SelectList(_context.Jobs, "Id", "Name", employee.JobId);
             return View(employee);
         }

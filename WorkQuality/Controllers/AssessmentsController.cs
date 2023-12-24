@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -62,27 +61,6 @@ namespace WorkQuality.Controllers
         {
             if (ModelState.IsValid)
             {
-                // Початок доданого мною.
-                Employee? employee = await _context.Employees.Where(e => e.Id == assessment.EmployeeId).SingleOrDefaultAsync();
-                if (employee != null)
-                {
-                    Job? job = await _context.Jobs.Where(j => j.Id == employee.JobId)
-                        .SingleOrDefaultAsync();
-                    if (job != null)
-                    {
-                        double rating = 0;
-                        rating += assessment.TechnicalKnowledgeScore * 
-                            job.TechnicalKnowledgePriorityCoefficient;
-                        rating += assessment.AbilityToApplyTechnicalKnowledgeScore * 
-                            job.AbilityToApplyTechnicalKnowledgePriorityCoefficient;
-                        rating += assessment.ProjectManagementSkillsScore * 
-                            job.ProjectManagementSkillsPriorityCoefficient;
-                        rating += assessment.QualityCustomerServiceScore * 
-                            job.QualityCustomerServicePriorityCoefficient;
-                        assessment.Rating = rating;
-                    }
-                }
-                // Кінець доданого мною.
                 _context.Add(assessment);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
@@ -125,28 +103,6 @@ namespace WorkQuality.Controllers
 
             if (ModelState.IsValid)
             {
-                // Початок доданого мною.
-                Employee? employee = await _context.Employees.Where(e => e.Id == assessment.EmployeeId)
-                    .SingleOrDefaultAsync();
-                if (employee != null)
-                {
-                    Job? job = await _context.Jobs.Where(j => j.Id == employee.JobId)
-                        .SingleOrDefaultAsync();
-                    if (job != null)
-                    {
-                        double rating = 0;
-                        rating += assessment.TechnicalKnowledgeScore * 
-                            job.TechnicalKnowledgePriorityCoefficient;
-                        rating += assessment.AbilityToApplyTechnicalKnowledgeScore * 
-                            job.AbilityToApplyTechnicalKnowledgePriorityCoefficient;
-                        rating += assessment.ProjectManagementSkillsScore * 
-                            job.ProjectManagementSkillsPriorityCoefficient;
-                        rating += assessment.QualityCustomerServiceScore * 
-                            job.QualityCustomerServicePriorityCoefficient;
-                        assessment.Rating = rating;
-                    }
-                }
-                // Кінець доданого мною.
                 try
                 {
                     _context.Update(assessment);

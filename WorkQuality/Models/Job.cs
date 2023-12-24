@@ -22,7 +22,5 @@ namespace WorkQuality.Models
         public double ProjectManagementSkillsPriorityCoefficient { get; set; } = 1;
 
         public double QualityCustomerServicePriorityCoefficient { get; set; } = 1;
-
-        //public ICollection<Criterion>? Criteria { get; set; }
     }
 }

@@ -23,14 +23,10 @@ namespace WorkQuality.Models
             //        Description = "Командна робота та комунікативні навички." });
         }
 
-        //public DbSet<Criterion> Criteria { get; set; }
-
         public DbSet<Job> Jobs { get; set; }
 
         public DbSet<Employee> Employees { get; set; }
 
         public DbSet<Assessment> Assessments { get; set; }
-
-        //public DbSet<Score> Scores { get; set; }
     }
 }
