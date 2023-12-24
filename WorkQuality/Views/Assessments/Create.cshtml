@@ -17,9 +17,9 @@
                 <select asp-for="EmployeeId" class ="form-control" asp-items="ViewBag.EmployeeId"></select>
             </div>
             <div class="form-group">
-                <label asp-for="AssessmentDate" class="control-label"></label>
-                <input asp-for="AssessmentDate" class="form-control" />
-                <span asp-validation-for="AssessmentDate" class="text-danger"></span>
+                <label asp-for="AssessDate" class="control-label"></label>
+                <input asp-for="AssessDate" class="form-control" />
+                <span asp-validation-for="AssessDate" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <label asp-for="TechnicalKnowledgeScore" class="control-label"></label>
@@ -32,9 +32,44 @@
                 <span asp-validation-for="AbilityToApplyTechnicalKnowledgeScore" class="text-danger"></span>
             </div>
             <div class="form-group">
+                <label asp-for="NumberAndSeverityOfErrorsScore" class="control-label"></label>
+                <input asp-for="NumberAndSeverityOfErrorsScore" value="5" class="form-control" />
+                <span asp-validation-for="NumberAndSeverityOfErrorsScore" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="CreativityOfSolutionsScore" class="control-label"></label>
+                <input asp-for="CreativityOfSolutionsScore" value="5" class="form-control" />
+                <span asp-validation-for="CreativityOfSolutionsScore" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="ComplianceOfWorkWithRequirementsScore" class="control-label"></label>
+                <input asp-for="ComplianceOfWorkWithRequirementsScore" value="5" class="form-control" />
+                <span asp-validation-for="ComplianceOfWorkWithRequirementsScore" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="ProductivityScore" class="control-label"></label>
+                <input asp-for="ProductivityScore" value="5" class="form-control" />
+                <span asp-validation-for="ProductivityScore" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="TeamworkScore" class="control-label"></label>
+                <input asp-for="TeamworkScore" value="5" class="form-control" />
+                <span asp-validation-for="TeamworkScore" class="text-danger"></span>
+            </div>
+            <div class="form-group">
                 <label asp-for="ProjectManagementSkillsScore" class="control-label"></label>
                 <input asp-for="ProjectManagementSkillsScore" value="5" class="form-control" />
                 <span asp-validation-for="ProjectManagementSkillsScore" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="TrainingAndDevelopmentScore" class="control-label"></label>
+                <input asp-for="TrainingAndDevelopmentScore" value="5" class="form-control" />
+                <span asp-validation-for="TrainingAndDevelopmentScore" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="ContributionToOverallGoalsScore" class="control-label"></label>
+                <input asp-for="ContributionToOverallGoalsScore" value="5" class="form-control" />
+                <span asp-validation-for="ContributionToOverallGoalsScore" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <label asp-for="QualityCustomerServiceScore" class="control-label"></label>
@@ -42,9 +77,9 @@
                 <span asp-validation-for="QualityCustomerServiceScore" class="text-danger"></span>
             </div>
             <div class="form-group" hidden>
-                <label hidden asp-for="Rating" class="control-label"></label>
-                <input hidden asp-for="Rating" value="0" class="form-control" />
-                <span hidden asp-validation-for="Rating" class="text-danger"></span>
+                <label asp-for="Rating" hidden class="control-label"></label>
+                <input asp-for="Rating" hidden class="form-control" />
+                <span asp-validation-for="Rating" hidden class="text-danger"></span>
             </div>
             <div class="form-group">
                 <input type="submit" value="Create" class="btn btn-primary" />

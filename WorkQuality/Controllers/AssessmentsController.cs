@@ -47,8 +47,7 @@ namespace WorkQuality.Controllers
         // GET: Assessments/Create
         public IActionResult Create()
         {
-            //ViewData["EmployeeId"] = new SelectList(_context.Employees, "Id", "Id");
-            ViewData["EmployeeId"] = new SelectList(_context.Employees, "Id", "LastName");
+            ViewData["EmployeeId"] = new SelectList(_context.Employees, "Id", "FullName");
             return View();
         }
 
@@ -57,16 +56,86 @@ namespace WorkQuality.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,EmployeeId,AssessmentDate,TechnicalKnowledgeScore,AbilityToApplyTechnicalKnowledgeScore,ProjectManagementSkillsScore,QualityCustomerServiceScore,Rating")] Assessment assessment)
+        public async Task<IActionResult> Create([Bind("Id,EmployeeId,AssessDate,TechnicalKnowledgeScore,AbilityToApplyTechnicalKnowledgeScore,NumberAndSeverityOfErrorsScore,CreativityOfSolutionsScore,ComplianceOfWorkWithRequirementsScore,ProductivityScore,TeamworkScore,ProjectManagementSkillsScore,TrainingAndDevelopmentScore,ContributionToOverallGoalsScore,QualityCustomerServiceScore,Rating")] Assessment assessment)
         {
             if (ModelState.IsValid)
             {
+                // Початок доданого мною.
+                Employee? employee = await _context.Employees
+                    .Where(e => e.Id == assessment.EmployeeId)
+                    .SingleOrDefaultAsync();
+                if (employee != null)
+                {
+                    Job? job = await _context.Jobs
+                        .Where(j => j.Id == employee.JobId)
+                        .SingleOrDefaultAsync();
+                    if (job != null)
+                    {
+                        double? rating = 0;
+                        if (assessment.TechnicalKnowledgeScore != null)
+                        {
+                            rating += assessment.TechnicalKnowledgeScore * 
+                                job.TechnicalKnowledgePriorityCoefficient;
+                        }
+                        if (assessment.AbilityToApplyTechnicalKnowledgeScore != null)
+                        {
+                            rating += assessment.AbilityToApplyTechnicalKnowledgeScore * 
+                                job.AbilityToApplyTechnicalKnowledgePriorityCoefficient;
+                        }
+                        if (assessment.NumberAndSeverityOfErrorsScore != null)
+                        {
+                            rating += assessment.NumberAndSeverityOfErrorsScore * 
+                                job.NumberAndSeverityOfErrorsPriorityCoefficient;
+                        }
+                        if (assessment.CreativityOfSolutionsScore != null)
+                        {
+                            rating += assessment.CreativityOfSolutionsScore + 
+                                job.CreativityOfSolutionsPriorityCoefficient;
+                        }
+                        if (assessment.ComplianceOfWorkWithRequirementsScore != null)
+                        {
+                            rating += assessment.ComplianceOfWorkWithRequirementsScore * 
+                                job.ComplianceOfWorkWithRequirementsPriorityCoefficient;
+                        }
+                        if (assessment.ProductivityScore != null)
+                        {
+                            rating += assessment.ProductivityScore * 
+                                job.ProductivityPriorityCoefficient;
+                        }
+                        if (assessment.TeamworkScore != null)
+                        {
+                            rating += assessment.TeamworkScore * 
+                                job.TeamworkPriorityCoefficient;
+                        }
+                        if (assessment.ProjectManagementSkillsScore != null)
+                        {
+                            rating += assessment.ProjectManagementSkillsScore * 
+                                job.ProjectManagementSkillsPriorityCoefficient;
+                        }
+                        if (assessment.TrainingAndDevelopmentScore != null)
+                        {
+                            rating += assessment.TrainingAndDevelopmentScore * 
+                                job.TrainingAndDevelopmentPriorityCoefficient;
+                        }
+                        if (assessment.ContributionToOverallGoalsScore != null)
+                        {
+                            rating += assessment.ContributionToOverallGoalsScore * 
+                                job.ContributionToOverallGoalsPriorityCoefficient;
+                        }
+                        if (assessment.QualityCustomerServiceScore != null)
+                        {
+                            rating += assessment.QualityCustomerServiceScore * 
+                                job.QualityCustomerServicePriorityCoefficient;
+                        }
+                        assessment.Rating = rating;
+                    }
+                }
+                // Кінець доданого мною.
                 _context.Add(assessment);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            //ViewData["EmployeeId"] = new SelectList(_context.Employees, "Id", "Id", assessment.EmployeeId);
-            ViewData["EmployeeId"] = new SelectList(_context.Employees, "Id", "LastName", assessment.EmployeeId);
+            ViewData["EmployeeId"] = new SelectList(_context.Employees, "Id", "FullName", assessment.EmployeeId);
             return View(assessment);
         }
 
@@ -83,9 +152,7 @@ namespace WorkQuality.Controllers
             {
                 return NotFound();
             }
-            //ViewData["EmployeeId"] = new SelectList(_context.Employees, "Id", "Id", assessment.EmployeeId);
-            //ViewData["EmployeeId"] = new SelectList(_context.Employees, "Id", "FirstName LastName", assessment.EmployeeId);
-            ViewData["EmployeeId"] = new SelectList(_context.Employees, "Id", "LastName", assessment.EmployeeId);
+            ViewData["EmployeeId"] = new SelectList(_context.Employees, "Id", "FullName", assessment.EmployeeId);
             return View(assessment);
         }
 
@@ -94,7 +161,7 @@ namespace WorkQuality.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,EmployeeId,AssessmentDate,TechnicalKnowledgeScore,AbilityToApplyTechnicalKnowledgeScore,ProjectManagementSkillsScore,QualityCustomerServiceScore,Rating")] Assessment assessment)
+        public async Task<IActionResult> Edit(int id, [Bind("Id,EmployeeId,AssessDate,TechnicalKnowledgeScore,AbilityToApplyTechnicalKnowledgeScore,NumberAndSeverityOfErrorsScore,CreativityOfSolutionsScore,ComplianceOfWorkWithRequirementsScore,ProductivityScore,TeamworkScore,ProjectManagementSkillsScore,TrainingAndDevelopmentScore,ContributionToOverallGoalsScore,QualityCustomerServiceScore,Rating")] Assessment assessment)
         {
             if (id != assessment.Id)
             {
@@ -103,6 +170,77 @@ namespace WorkQuality.Controllers
 
             if (ModelState.IsValid)
             {
+                // Початок доданого мною.
+                Employee? employee = await _context.Employees
+                    .Where(e => e.Id == assessment.EmployeeId)
+                    .SingleOrDefaultAsync();
+                if (employee != null)
+                {
+                    Job? job = await _context.Jobs
+                        .Where(j => j.Id == employee.JobId)
+                        .SingleOrDefaultAsync();
+                    if (job != null)
+                    {
+                        double? rating = 0;
+                        if (assessment.TechnicalKnowledgeScore != null)
+                        {
+                            rating += assessment.TechnicalKnowledgeScore *
+                                job.TechnicalKnowledgePriorityCoefficient;
+                        }
+                        if (assessment.AbilityToApplyTechnicalKnowledgeScore != null)
+                        {
+                            rating += assessment.AbilityToApplyTechnicalKnowledgeScore *
+                                job.AbilityToApplyTechnicalKnowledgePriorityCoefficient;
+                        }
+                        if (assessment.NumberAndSeverityOfErrorsScore != null)
+                        {
+                            rating += assessment.NumberAndSeverityOfErrorsScore *
+                                job.NumberAndSeverityOfErrorsPriorityCoefficient;
+                        }
+                        if (assessment.CreativityOfSolutionsScore != null)
+                        {
+                            rating += assessment.CreativityOfSolutionsScore +
+                                job.CreativityOfSolutionsPriorityCoefficient;
+                        }
+                        if (assessment.ComplianceOfWorkWithRequirementsScore != null)
+                        {
+                            rating += assessment.ComplianceOfWorkWithRequirementsScore *
+                                job.ComplianceOfWorkWithRequirementsPriorityCoefficient;
+                        }
+                        if (assessment.ProductivityScore != null)
+                        {
+                            rating += assessment.ProductivityScore *
+                                job.ProductivityPriorityCoefficient;
+                        }
+                        if (assessment.TeamworkScore != null)
+                        {
+                            rating += assessment.TeamworkScore *
+                                job.TeamworkPriorityCoefficient;
+                        }
+                        if (assessment.ProjectManagementSkillsScore != null)
+                        {
+                            rating += assessment.ProjectManagementSkillsScore *
+                                job.ProjectManagementSkillsPriorityCoefficient;
+                        }
+                        if (assessment.TrainingAndDevelopmentScore != null)
+                        {
+                            rating += assessment.TrainingAndDevelopmentScore *
+                                job.TrainingAndDevelopmentPriorityCoefficient;
+                        }
+                        if (assessment.ContributionToOverallGoalsScore != null)
+                        {
+                            rating += assessment.ContributionToOverallGoalsScore *
+                                job.ContributionToOverallGoalsPriorityCoefficient;
+                        }
+                        if (assessment.QualityCustomerServiceScore != null)
+                        {
+                            rating += assessment.QualityCustomerServiceScore *
+                                job.QualityCustomerServicePriorityCoefficient;
+                        }
+                        assessment.Rating = rating;
+                    }
+                }
+                // Кінець доданого мною.
                 try
                 {
                     _context.Update(assessment);
@@ -121,8 +259,7 @@ namespace WorkQuality.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
-            //ViewData["EmployeeId"] = new SelectList(_context.Employees, "Id", "Id", assessment.EmployeeId);
-            ViewData["EmployeeId"] = new SelectList(_context.Employees, "Id", "LastName", assessment.EmployeeId);
+            ViewData["EmployeeId"] = new SelectList(_context.Employees, "Id", "FullName", assessment.EmployeeId);
             return View(assessment);
         }
 

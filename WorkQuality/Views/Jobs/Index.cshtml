@@ -4,7 +4,7 @@
     ViewData["Title"] = "Index";
 }
 
-<h1>Index</h1>
+<h1>Посади</h1>
 
 <p>
     <a asp-action="Create">Create New</a>
@@ -25,7 +25,28 @@
                 @Html.DisplayNameFor(model => model.AbilityToApplyTechnicalKnowledgePriorityCoefficient)
             </th>
             <th>
+                @Html.DisplayNameFor(model => model.NumberAndSeverityOfErrorsPriorityCoefficient)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.CreativityOfSolutionsPriorityCoefficient)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ComplianceOfWorkWithRequirementsPriorityCoefficient)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ProductivityPriorityCoefficient)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.TeamworkPriorityCoefficient)
+            </th>
+            <th>
                 @Html.DisplayNameFor(model => model.ProjectManagementSkillsPriorityCoefficient)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.TrainingAndDevelopmentPriorityCoefficient)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ContributionToOverallGoalsPriorityCoefficient)
             </th>
             <th>
                 @Html.DisplayNameFor(model => model.QualityCustomerServicePriorityCoefficient)
@@ -49,7 +70,28 @@
                 @Html.DisplayFor(modelItem => item.AbilityToApplyTechnicalKnowledgePriorityCoefficient)
             </td>
             <td>
+                @Html.DisplayFor(modelItem => item.NumberAndSeverityOfErrorsPriorityCoefficient)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.CreativityOfSolutionsPriorityCoefficient)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ComplianceOfWorkWithRequirementsPriorityCoefficient)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ProductivityPriorityCoefficient)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.TeamworkPriorityCoefficient)
+            </td>
+            <td>
                 @Html.DisplayFor(modelItem => item.ProjectManagementSkillsPriorityCoefficient)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.TrainingAndDevelopmentPriorityCoefficient)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ContributionToOverallGoalsPriorityCoefficient)
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.QualityCustomerServicePriorityCoefficient)

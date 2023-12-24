@@ -4,7 +4,7 @@
     ViewData["Title"] = "Index";
 }
 
-<h1>Index</h1>
+<h1>Оцінювання</h1>
 
 <p>
     <a asp-action="Create">Create New</a>
@@ -16,7 +16,7 @@
                 @Html.DisplayNameFor(model => model.Employee)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.AssessmentDate)
+                @Html.DisplayNameFor(model => model.AssessDate)
             </th>
             <th>
                 @Html.DisplayNameFor(model => model.TechnicalKnowledgeScore)
@@ -25,7 +25,28 @@
                 @Html.DisplayNameFor(model => model.AbilityToApplyTechnicalKnowledgeScore)
             </th>
             <th>
+                @Html.DisplayNameFor(model => model.NumberAndSeverityOfErrorsScore)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.CreativityOfSolutionsScore)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ComplianceOfWorkWithRequirementsScore)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ProductivityScore)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.TeamworkScore)
+            </th>
+            <th>
                 @Html.DisplayNameFor(model => model.ProjectManagementSkillsScore)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.TrainingAndDevelopmentScore)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ContributionToOverallGoalsScore)
             </th>
             <th>
                 @Html.DisplayNameFor(model => model.QualityCustomerServiceScore)
@@ -40,10 +61,11 @@
 @foreach (var item in Model) {
         <tr>
             <td>
-                @Html.DisplayFor(modelItem => item.Employee.Id)
+                @* @Html.DisplayFor(modelItem => item.Employee.Id) *@
+                    @Html.DisplayFor(modelItem => item.Employee.FullName)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.AssessmentDate)
+                @Html.DisplayFor(modelItem => item.AssessDate)
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.TechnicalKnowledgeScore)
@@ -52,7 +74,28 @@
                 @Html.DisplayFor(modelItem => item.AbilityToApplyTechnicalKnowledgeScore)
             </td>
             <td>
+                @Html.DisplayFor(modelItem => item.NumberAndSeverityOfErrorsScore)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.CreativityOfSolutionsScore)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ComplianceOfWorkWithRequirementsScore)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ProductivityScore)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.TeamworkScore)
+            </td>
+            <td>
                 @Html.DisplayFor(modelItem => item.ProjectManagementSkillsScore)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.TrainingAndDevelopmentScore)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ContributionToOverallGoalsScore)
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.QualityCustomerServiceScore)
