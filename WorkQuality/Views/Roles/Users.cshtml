@@ -1,0 +1,19 @@
+﻿@model IEnumerable<WorkQuality.Models.ApplicationUser>
+@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+
+<h1>Список користувачів</h1>
+<table class="table">
+    @foreach (var user in Model)
+    {
+        <tr>
+            <td>@user.Email</td>
+            <td>
+                <a class="btn btn-sm btn-primary" asp-action="Edit" asp-route-userid="@user.Id">Права доступу</a>
+            </td>
+        </tr>
+    }
+</table>
+@{
+}

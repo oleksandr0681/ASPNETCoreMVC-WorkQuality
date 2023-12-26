@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
@@ -45,6 +46,7 @@ namespace WorkQuality.Controllers
         }
 
         // GET: Assessments/Create
+        [Authorize(Roles = "ManagementSpecialist, Administrator")]
         public IActionResult Create()
         {
             ViewData["EmployeeId"] = new SelectList(_context.Employees, "Id", "FullName");
@@ -56,11 +58,11 @@ namespace WorkQuality.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Authorize(Roles = "ManagementSpecialist, Administrator")]
         public async Task<IActionResult> Create([Bind("Id,EmployeeId,AssessDate,TechnicalKnowledgeScore,AbilityToApplyTechnicalKnowledgeScore,NumberAndSeverityOfErrorsScore,CreativityOfSolutionsScore,ComplianceOfWorkWithRequirementsScore,ProductivityScore,TeamworkScore,ProjectManagementSkillsScore,TrainingAndDevelopmentScore,ContributionToOverallGoalsScore,QualityCustomerServiceScore,Rating")] Assessment assessment)
         {
             if (ModelState.IsValid)
             {
-                // Початок доданого мною.
                 Employee? employee = await _context.Employees
                     .Where(e => e.Id == assessment.EmployeeId)
                     .SingleOrDefaultAsync();
@@ -130,7 +132,6 @@ namespace WorkQuality.Controllers
                         assessment.Rating = rating;
                     }
                 }
-                // Кінець доданого мною.
                 _context.Add(assessment);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
@@ -140,6 +141,7 @@ namespace WorkQuality.Controllers
         }
 
         // GET: Assessments/Edit/5
+        [Authorize(Roles = "ManagementSpecialist, Administrator")]
         public async Task<IActionResult> Edit(int? id)
         {
             if (id == null || _context.Assessments == null)
@@ -161,6 +163,7 @@ namespace WorkQuality.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Authorize(Roles = "ManagementSpecialist, Administrator")]
         public async Task<IActionResult> Edit(int id, [Bind("Id,EmployeeId,AssessDate,TechnicalKnowledgeScore,AbilityToApplyTechnicalKnowledgeScore,NumberAndSeverityOfErrorsScore,CreativityOfSolutionsScore,ComplianceOfWorkWithRequirementsScore,ProductivityScore,TeamworkScore,ProjectManagementSkillsScore,TrainingAndDevelopmentScore,ContributionToOverallGoalsScore,QualityCustomerServiceScore,Rating")] Assessment assessment)
         {
             if (id != assessment.Id)
@@ -170,7 +173,6 @@ namespace WorkQuality.Controllers
 
             if (ModelState.IsValid)
             {
-                // Початок доданого мною.
                 Employee? employee = await _context.Employees
                     .Where(e => e.Id == assessment.EmployeeId)
                     .SingleOrDefaultAsync();
@@ -240,7 +242,6 @@ namespace WorkQuality.Controllers
                         assessment.Rating = rating;
                     }
                 }
-                // Кінець доданого мною.
                 try
                 {
                     _context.Update(assessment);
@@ -264,6 +265,7 @@ namespace WorkQuality.Controllers
         }
 
         // GET: Assessments/Delete/5
+        [Authorize(Roles = "ManagementSpecialist, Administrator")]
         public async Task<IActionResult> Delete(int? id)
         {
             if (id == null || _context.Assessments == null)
@@ -285,6 +287,7 @@ namespace WorkQuality.Controllers
         // POST: Assessments/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
+        [Authorize(Roles = "ManagementSpecialist, Administrator")]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
             if (_context.Assessments == null)

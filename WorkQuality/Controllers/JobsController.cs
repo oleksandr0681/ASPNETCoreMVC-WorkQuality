@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
@@ -45,6 +46,7 @@ namespace WorkQuality.Controllers
         }
 
         // GET: Jobs/Create
+        [Authorize(Roles = "Administrator")]
         public IActionResult Create()
         {
             return View();
@@ -67,6 +69,7 @@ namespace WorkQuality.Controllers
         }
 
         // GET: Jobs/Edit/5
+        [Authorize(Roles = "Administrator")]
         public async Task<IActionResult> Edit(int? id)
         {
             if (id == null || _context.Jobs == null)
@@ -87,6 +90,7 @@ namespace WorkQuality.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Authorize(Roles = "Administrator")]
         public async Task<IActionResult> Edit(int id, [Bind("Id,Name,Description,TechnicalKnowledgePriorityCoefficient,AbilityToApplyTechnicalKnowledgePriorityCoefficient,NumberAndSeverityOfErrorsPriorityCoefficient,CreativityOfSolutionsPriorityCoefficient,ComplianceOfWorkWithRequirementsPriorityCoefficient,ProductivityPriorityCoefficient,TeamworkPriorityCoefficient,ProjectManagementSkillsPriorityCoefficient,TrainingAndDevelopmentPriorityCoefficient,ContributionToOverallGoalsPriorityCoefficient,QualityCustomerServicePriorityCoefficient")] Job job)
         {
             if (id != job.Id)
@@ -118,6 +122,7 @@ namespace WorkQuality.Controllers
         }
 
         // GET: Jobs/Delete/5
+        [Authorize(Roles = "Administrator")]
         public async Task<IActionResult> Delete(int? id)
         {
             if (id == null || _context.Jobs == null)
@@ -138,6 +143,7 @@ namespace WorkQuality.Controllers
         // POST: Jobs/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
+        [Authorize(Roles = "Administrator")]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
             if (_context.Jobs == null)

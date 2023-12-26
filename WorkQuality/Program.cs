@@ -7,13 +7,13 @@ using System.Data;
 
 var builder = WebApplication.CreateBuilder(args);
 
-// Додано мною. Рядок підключення з файла конфігурації.
+// Рядок підключення з файла конфігурації.
 string? connection = builder.Configuration.GetConnectionString("WorkQualityConnection");
 
 // Додаю контекст WorkQualityDbContext в якості сервіса.
 builder.Services.AddDbContext<WorkQualityDbContext>(options => options.UseSqlServer(connection));
 
-// Додано мною. Рядок підключення для Core Identity з файла конфігурації.
+// Рядок підключення для Core Identity з файла конфігурації.
 string? identityConnection = builder.Configuration.GetConnectionString("IdentityConnection");
 
 // Додаю контекст ApplicationDbContext в якості сервіса.
@@ -40,7 +40,6 @@ builder.Services.AddControllersWithViews();
 
 var app = builder.Build();
 
-// --- Початок дописаного мною (Begin added by me). ---
 using(var scope = app.Services.CreateScope())
 {
     var services = scope.ServiceProvider;
@@ -90,7 +89,6 @@ using(var scope = app.Services.CreateScope())
         logger.LogError(ex, ex.Message);
     }
 }
-// --- Кінець дописаного мною (End added by me).    ---
 
 // Configure the HTTP request pipeline.
 if (!app.Environment.IsDevelopment())

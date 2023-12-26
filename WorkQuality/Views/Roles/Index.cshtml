@@ -1,0 +1,17 @@
+﻿@model IEnumerable<Microsoft.AspNetCore.Identity.IdentityRole>
+@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+
+<h1>Список ролей</h1>
+<table class="table">
+    @foreach (var role in Model)
+    {
+        <tr>
+            <td>@role.Name</td>
+        </tr>
+    }
+</table>
+<a asp-action="Users">Список користувачів</a>
+@{
+}
