@@ -57,6 +57,7 @@ using(var scope = app.Services.CreateScope())
         string roleManagementSpecialist = "ManagementSpecialist";
         string adminEmail = "admin@example.com";
         string password = "Qwerty+1";
+        //string password = builder.Configuration["password"];
         if (await roleManager.FindByNameAsync(roleAdmin) == null)
         {
             await roleManager.CreateAsync(new IdentityRole(roleAdmin));
