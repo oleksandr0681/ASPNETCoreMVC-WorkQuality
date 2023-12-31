@@ -13,18 +13,25 @@ namespace WorkQuality.Models
         {
             base.OnModelCreating(modelBuilder);
 
-            //modelBuilder.Entity<Job>(entity => { entity.HasKey(k => k.Id); });
-            //modelBuilder.Entity<Job>().HasData(
-            //    new Job { Id = 1, Name = "Програміст", 
-            //        NumberAndSeverityOfErrorsPriorityCoefficient = 2, 
-            //        ComplianceOfWorkWithRequirementsPriorityCoefficient = 2, 
-            //        ProjectManagementSkillsPriorityCoefficient = 0, 
-            //        QualityCustomerServicePriorityCoefficient = 0 }, 
-            //    new Job { Id = 2, Name = "Дизайнер", 
-            //        CreativityOfSolutionsPriorityCoefficient=4,
-            //        ProjectManagementSkillsPriorityCoefficient = 0,
-            //        QualityCustomerServicePriorityCoefficient = 0
-            //    });
+            modelBuilder.Entity<Job>(entity => { entity.HasKey(k => k.Id); });
+            modelBuilder.Entity<Job>().HasData(
+                new Job
+                {
+                    Id = 1,
+                    Name = "Програміст",
+                    NumberAndSeverityOfErrorsPriorityCoefficient = 2,
+                    ComplianceOfWorkWithRequirementsPriorityCoefficient = 2,
+                    ProjectManagementSkillsPriorityCoefficient = 0,
+                    QualityCustomerServicePriorityCoefficient = 0
+                },
+                new Job
+                {
+                    Id = 2,
+                    Name = "Дизайнер",
+                    CreativityOfSolutionsPriorityCoefficient = 4,
+                    ProjectManagementSkillsPriorityCoefficient = 0,
+                    QualityCustomerServicePriorityCoefficient = 0
+                });
         }
 
         public DbSet<Job> Jobs { get; set; }
