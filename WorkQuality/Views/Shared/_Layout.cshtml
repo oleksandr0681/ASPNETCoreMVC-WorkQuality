@@ -6,11 +6,12 @@
     <title>@ViewData["Title"] - WorkQuality</title>
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
     <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/css/style.css" />
     <link rel="stylesheet" href="~/WorkQuality.styles.css" asp-append-version="true" />
 </head>
 <body>
     <header>
-        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
+        <nav class="navbar navbar-inverse navbar-expand-sm navbar-toggleable-sm navbar-light bg-dark navbar-dark border-bottom box-shadow">
             <div class="container-fluid">
                 <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">WorkQuality</a>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" aria-controls="navbarSupportedContent"
@@ -20,16 +21,16 @@
                 <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
                     <ul class="navbar-nav flex-grow-1">
                         <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Головна</a>
+                            <a class="nav-link text-light" asp-area="" asp-controller="Home" asp-action="Index">Головна</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Jobs" asp-action="Index">Посади</a>
+                            <a class="nav-link text-light" asp-area="" asp-controller="Jobs" asp-action="Index">Посади</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Employees" asp-action="Index">Працівники</a>
+                            <a class="nav-link text-light" asp-area="" asp-controller="Employees" asp-action="Index">Працівники</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Assessments" asp-action="Index">Оцінювання</a>
+                            <a class="nav-link text-light" asp-area="" asp-controller="Assessments" asp-action="Index">Оцінювання</a>
                         </li>
                         @* <li class="nav-item">
                             <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
