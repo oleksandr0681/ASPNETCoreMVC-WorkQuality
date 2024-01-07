@@ -58,7 +58,6 @@
             ViewData["ChartRatings"] = ratings;
         }
     </ul>
-    @* <div class="chartData"></div> *@
     <div id="chart"></div>
 </div>
 <div>
@@ -68,9 +67,6 @@
 
 <script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
 <script>
-    // let chartDataElement = document.querySelector(".chartData");
-    // chartDataElement.textContent = @Html.Raw(Json.Serialize(ViewData["ChartDates"]));
-    // chartDataElement.textContent += @Html.Raw(Json.Serialize(ViewData["ChartRatings"]));
     let chartDates = [];
     let chartRatings = [];
     chartDates = @Html.Raw(Json.Serialize(ViewData["ChartDates"]));
