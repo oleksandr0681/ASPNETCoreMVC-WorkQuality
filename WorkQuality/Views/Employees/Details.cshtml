@@ -10,27 +10,27 @@
     <h4>Працівник</h4>
     <hr />
     <dl class="row">
-        <dt class = "col-sm-4">
+        <dt class = "col-sm-4 dtElement">
             @Html.DisplayNameFor(model => model.FullName)
         </dt>
-        <dd class = "col-sm-8">
+        <dd class = "col-sm-8 ddElement">
             @Html.DisplayFor(model => model.FullName)
         </dd>
-        <dt class = "col-sm-4">
+        <dt class = "col-sm-4 dtElement">
             @Html.DisplayNameFor(model => model.Job)
         </dt>
-        <dd class = "col-sm-8">
+        <dd class = "col-sm-8 ddElement">
             @Html.DisplayFor(model => model.Job.Name)
         </dd>
-        <dt class = "col-sm-4">
+        <dt class = "col-sm-4 dtElement">
             @Html.DisplayNameFor(model => model.Description)
         </dt>
-        <dd class = "col-sm-8">
+        <dd class = "col-sm-8 ddElement">
             @Html.DisplayFor(model => model.Description)
         </dd>
     </dl>
-    <p><strong>Рейтинг</strong></p>
-    <ul>
+    <h3>Рейтинг</h3>
+    <ul class="ratings">
         @if (Model.Assessments != null)
         {
             List<string> assesDates = new List<string>();
@@ -41,16 +41,23 @@
                 {
                     ratings.Add(assessment.Rating.ToString());
                     assesDates.Add(assessment.AssessDate.ToString("MM-dd-yyyy"));
-                    <li>
-                        @if (assessment.AssessDate != null)
-                        {
-                            @assessment.AssessDate.ToLongDateString()
-                        }
-                        <span> </span>
-                        @if (assessment.Rating != null)
-                        {
-                            <strong>@assessment.Rating</strong>
-                        }
+                    <li class="rating">
+                        <span>
+                            Дата оцінювання
+                            @if (assessment.AssessDate != null)
+                            {
+                                @assessment.AssessDate.ToLongDateString()
+                            }
+                            , 
+                        </span>
+                        <span>
+                            рейтинг 
+                            @if (assessment.Rating != null)
+                            {
+                                <strong>@assessment.Rating</strong>
+                            }
+                        </span>
+                        
                     </li>
                 }
             }
@@ -65,35 +72,38 @@
     <a asp-action="Index" class="btn btn-primary">Повернутись до списку</a>
 </div>
 
-<script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
+<script src="~/apexcharts/apexcharts.js"></script>
 <script>
     let chartDates = [];
     let chartRatings = [];
     chartDates = @Html.Raw(Json.Serialize(ViewData["ChartDates"]));
     chartRatings = @Html.Raw(Json.Serialize(ViewData["ChartRatings"]));
     let chartData = [];
-    for (let i = 0; i < chartDates.length; i++) {
-        let elementArray = [chartDates[i], Number.parseFloat(chartRatings[i].replace(",", "."))];
-        chartData.push(elementArray);
-    }
-    let options = {
-        chart: {
-            type: 'line'
-        },
-        series: [{
-            name: 'Rating',
-            data: chartData
-        }],
-        title: {
-            text: 'Рейтинг',
-            align: 'center'
-        },
-        xaxis: {
-            type: 'datetime'
+    if (chartDates.length > 0) {
+        for (let i = 0; i < chartDates.length; i++) {
+            let elementArray = [chartDates[i], Number.parseFloat(chartRatings[i].replace(",", "."))];
+            chartData.push(elementArray);
         }
+        let options = {
+            chart: {
+                type: 'line'
+            },
+            series: [{
+                name: 'Rating',
+                data: chartData
+            }],
+            // title: {
+            //     text: 'Рейтинг',
+            //     align: 'center'
+            // },
+            xaxis: {
+                type: 'datetime'
+            }
+        }
+
+        let chart = new ApexCharts(document.querySelector("#chart"), options);
+
+        chart.render();
     }
-
-    let chart = new ApexCharts(document.querySelector("#chart"), options);
-
-    chart.render();
+    
 </script>

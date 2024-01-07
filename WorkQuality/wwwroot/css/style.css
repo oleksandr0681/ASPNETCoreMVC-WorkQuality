@@ -19,11 +19,32 @@ footer {
     background-color: #eeffee;
 }
 
-h1 {
+h1, h3 {
     text-align: center;
 }
 
-dt {
+.ratings {
+    padding-left: 0;
+}
+
+.rating {
+    margin: 0 auto;
+    list-style-type: none;
+    padding: 10px;
+    background-color: #dddddd;
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.rating > span:first-of-type {
+    flex-grow: 4;
+}
+
+.rating > span:last-of-type {
+    flex-grow: 1;
+}
+
+.dtElement {
     padding: 10px;
     margin-bottom: 10px;
     background-color: #dddddd;
@@ -33,7 +54,7 @@ dt {
     border-bottom: solid 1px #dddddd;
 }
 
-dd {
+.ddElement {
     padding: 10px;
     margin-bottom: 10px;
     box-shadow: 0pt 3px 2px rgba(50, 50, 50, .4);
@@ -47,3 +68,61 @@ dd {
     margin-bottom: 5px;
     box-shadow: 1pt 3pt 8pt rgba(50, 50, 50, .4);
 }*/
+
+.workCard {
+    width: 80%;
+    margin: 25px auto;
+    display: grid;
+    grid-template-columns: 3fr 1fr;
+    border: 2px solid #dddddd;
+    box-shadow: 2px 3px 8px rgba(50, 50, 50, .4);
+}
+
+.workCard:hover {
+    border: 2px solid rgba(100, 150, 50, .4);
+    box-shadow: 4px 5px 15px rgba(100, 150, 50, .8);
+}
+
+.workCard > a {
+    color: black;
+}
+
+.item {
+    display: grid;
+    grid-template-columns: 1fr 2fr;
+}
+
+.item__parameter {
+    padding: 5px;
+    background-color: #dddddd;
+}
+
+.item__value {
+    padding: 5px;
+}
+
+.workLinks {
+    padding: 5px;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    flex-wrap: wrap;
+}
+
+@media (max-width: 400px) {
+    .workCard {
+        width: 100%;
+        display: flex;
+        flex-wrap: wrap;
+    }
+}
+
+@media (max-width: 300px) {
+    .item {
+        grid-template-columns: 1fr;
+    }
+
+    .item__parameter {
+        display: none;
+    }
+}

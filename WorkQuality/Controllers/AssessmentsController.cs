@@ -22,7 +22,7 @@ namespace WorkQuality.Controllers
         // GET: Assessments
         public async Task<IActionResult> Index()
         {
-            var workQualityDbContext = _context.Assessments.Include(a => a.Employee);
+            var workQualityDbContext = _context.Assessments.Include(a => a.Employee).Include(e => e.Employee.Job);
             return View(await workQualityDbContext.ToListAsync());
         }
 

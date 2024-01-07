@@ -7,9 +7,9 @@
 <h1>Працівники</h1>
 
 <p>
-    <a asp-action="Create">Створити</a>
+    <a asp-action="Create" class="btn btn-primary">Створити</a>
 </p>
-<table class="table">
+@* <table class="table">
     <thead>
         <tr>
             <th>
@@ -44,4 +44,22 @@
         </tr>
 }
     </tbody>
-</table>
+</table> *@
+
+@foreach (var item in Model)
+{
+    <div class="workCard">
+        <a asp-action="Details" asp-route-id="@item.Id">
+            <div class="item">
+                <div class="item__parameter">@Html.DisplayNameFor(model => model.FullName)</div>
+                <div class="item__value"><strong>@item.FullName</strong></div>
+                <div class="item__parameter">@Html.DisplayNameFor(model => model.Job)</div>
+                <div class="item__value"><strong>@item.Job.Name</strong></div>
+            </div>
+        </a>
+        <div class="workLinks">
+            <a asp-action="Edit" asp-route-id="@item.Id" class="btn btn-primary">Змінити</a>
+            <a asp-action="Delete" asp-route-id="@item.Id" class="btn btn-primary">Вилучити</a>
+        </div>
+    </div>
+}

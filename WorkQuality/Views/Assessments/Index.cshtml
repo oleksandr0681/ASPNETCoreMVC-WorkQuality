@@ -7,9 +7,9 @@
 <h1>Оцінювання</h1>
 
 <p>
-    <a asp-action="Create">Створити</a>
+    <a asp-action="Create" class="btn btn-primary">Створити</a>
 </p>
-<table class="table">
+@* <table class="table">
     <thead>
         <tr>
             <th>
@@ -18,7 +18,7 @@
             <th>
                 @Html.DisplayNameFor(model => model.AssessDate)
             </th>
-            @* <th>
+            <th>
                 @Html.DisplayNameFor(model => model.TechnicalKnowledgeScore)
             </th>
             <th>
@@ -50,7 +50,7 @@
             </th>
             <th>
                 @Html.DisplayNameFor(model => model.QualityCustomerServiceScore)
-            </th> *@
+            </th>
             <th>
                 @Html.DisplayNameFor(model => model.Rating)
             </th>
@@ -66,7 +66,7 @@
             <td>
                 @Html.DisplayFor(modelItem => item.AssessDate)
             </td>
-            @* <td>
+            <td>
                 @Html.DisplayFor(modelItem => item.TechnicalKnowledgeScore)
             </td>
             <td>
@@ -98,7 +98,7 @@
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.QualityCustomerServiceScore)
-            </td> *@
+            </td>
             <td>
                 @Html.DisplayFor(modelItem => item.Rating)
             </td>
@@ -110,4 +110,24 @@
         </tr>
 }
     </tbody>
-</table>
+</table> *@
+
+@foreach (var item in Model)
+{
+    <div class="workCard">
+        <a asp-action="Details" asp-route-id="@item.Id">
+            <div class="item">
+                <div class="item__parameter">@Html.DisplayNameFor(model => model.Employee)</div>
+                <div class="item__value">@item.Employee.FullName</div>
+                <div class="item__parameter">@Html.DisplayNameFor(model => model.Employee.Job)</div>
+                <div class="item__value">@item.Employee.Job.Name</div>
+                <div class="item__parameter">@Html.DisplayNameFor(model => model.AssessDate)</div>
+                <div class="item__value">@item.AssessDate</div>
+            </div>
+        </a>
+        <div class="workLinks">
+            <a asp-action="Edit" asp-route-id="@item.Id" class="btn btn-primary">Змінити</a>
+            <a asp-action="Delete" asp-route-id="@item.Id" class="btn btn-primary">Вилучити</a>
+        </div>
+    </div>
+}
