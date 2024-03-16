@@ -1,0 +1,17 @@
+﻿<!-- ConfirmDelete.cshtml -->
+@model ApplicationUser
+@{
+    ViewData["Title"] = "Confirm delete";
+}
+
+<h1>Confirm delete</h1>
+
+<p>
+    Are you sure you want to delete the user with the username:
+    <strong>@Model.UserName</strong>?
+</p>
+<form asp-controller="Account" asp-action="DeleteConfirmed" method="post">
+    <input type="hidden" asp-for="Id" />
+    <input type="submit" value="Delete User" class="btn btn-danger" /> | 
+    <a asp-controller="Manage" asp-action="Index">Return to manage</a>
+</form>

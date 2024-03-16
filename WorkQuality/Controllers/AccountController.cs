@@ -539,6 +539,50 @@ public class AccountController : Controller
         return View();
     }
 
+    // GET: /Account/ConfirmDelete
+    [HttpGet]
+    public async Task<IActionResult> ConfirmDelete()
+    {
+        // Перший варіант.
+        //var currentUser = await GetCurrentUserAsync();
+        // Другий варіант.
+        var currentUser = await _userManager.GetUserAsync(User);
+        if (currentUser == null)
+        {
+            return View("Error");
+        }
+        return View(currentUser);
+    }
+
+    // POST: /Account/DeleteConfirmed
+    [HttpPost]
+    [ValidateAntiForgeryToken]
+    public async Task<IActionResult> DeleteConfirmed(string Id)
+    {
+        var user = await _userManager.FindByIdAsync(Id);
+        if (user == null)
+        {
+            // Handle user not found
+            return NotFound();
+        }
+        var result = await _userManager.DeleteAsync(user);
+        if (result.Succeeded)
+        {
+            // Deletion successful
+            // Redirect or show a success message
+            await _signInManager.SignOutAsync();
+        }
+        else
+        {
+            // Handle errors
+            foreach (var error in result.Errors)
+            {
+                // Handle each error as needed
+            }
+        }
+        return RedirectToAction("Index", "Home");
+    }
+
     #region Helpers
 
     private void AddErrors(IdentityResult result)
