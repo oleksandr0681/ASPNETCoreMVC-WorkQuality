@@ -549,7 +549,7 @@ public class AccountController : Controller
         var currentUser = await _userManager.GetUserAsync(User);
         if (currentUser == null)
         {
-            return View("Error");
+            return View("Error", new ErrorViewModel());
         }
         return View(currentUser);
     }
